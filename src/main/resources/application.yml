@@ -1,0 +1,49 @@
+spring:
+  redis:
+    database: 1
+    host: localhost
+    port: 6379
+    password:
+    jedis:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-active: 8
+        max-wait: 2000ms
+
+  datasource:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.jdbc.Driver
+        driver-class-name: com.mysql.jdbc.Driver
+        platform: mysql
+        url: jdbc:mysql://127.0.0.1:3306/tcbj-xxx?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: root
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+        maxWait: 60000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT1FROMDUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        filters: stat,wall,log4j
+        logSlowSql: true
+  #mybatis
+  mybatis:
+    type-aliases-package: top.whattowatch.wtw.po
+    mapper-locations: classpath:mapping/*.xml
+  #pagehelper
+  pagehelper:
+      helperDialect: mysql
+      reasonable: true
+      supportMethodsArguments: true
+      params: count=countSql
+      returnPageInfo: check
+  #启动服务
+  server:
+      port: 8080
+logging:
+  file: log/wtw.log
