@@ -6,5 +6,6 @@
 <h3>3.整合mybatis，application.yml配置</h3>
 <h3>4.gennerator生成mapper接口，pojo,xml配置。。。</h3>
 <h3>5.添加druid监控</h3>
+<h3>5.添加springboot admin server对应用进行监控</h3>
 
 
