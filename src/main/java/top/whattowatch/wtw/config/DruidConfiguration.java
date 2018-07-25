@@ -18,8 +18,6 @@ import org.springframework.context.annotation.Configuration;
  **/
 @Configuration
 public class DruidConfiguration {
-    private static final String DB_PREFIX = "spring.datasource";
-
     @Bean
     public ServletRegistrationBean druidServlet() {
 
