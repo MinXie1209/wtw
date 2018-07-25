@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.whattowatch.wtw.mapper.HistoricalRecordsMapper" >
+  <resultMap id="BaseResultMap" type="top.whattowatch.wtw.po.HistoricalRecords" >
+    <id column="hrId" property="hrid" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="top.whattowatch.wtw.po.HistoricalRecords" extends="BaseResultMap" >
+    <result column="mTitle" property="mtitle" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    hrId, userId, time
+  </sql>
+  <sql id="Blob_Column_List" >
+    mTitle
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="top.whattowatch.wtw.po.HistoricalRecordsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from historical_records
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="top.whattowatch.wtw.po.HistoricalRecordsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from historical_records
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from historical_records
+    where hrId = #{hrid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from historical_records
+    where hrId = #{hrid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="top.whattowatch.wtw.po.HistoricalRecordsExample" >
+    delete from historical_records
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="top.whattowatch.wtw.po.HistoricalRecords" >
+    insert into historical_records (hrId, userId, time, 
+      mTitle)
+    values (#{hrid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, 
+      #{mtitle,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="top.whattowatch.wtw.po.HistoricalRecords" >
+    insert into historical_records
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hrid != null" >
+        hrId,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="mtitle != null" >
+        mTitle,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hrid != null" >
+        #{hrid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtitle != null" >
+        #{mtitle,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="top.whattowatch.wtw.po.HistoricalRecordsExample" resultType="java.lang.Integer" >
+    select count(*) from historical_records
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update historical_records
+    <set >
+      <if test="record.hrid != null" >
+        hrId = #{record.hrid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mtitle != null" >
+        mTitle = #{record.mtitle,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update historical_records
+    set hrId = #{record.hrid,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      mTitle = #{record.mtitle,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update historical_records
+    set hrId = #{record.hrid,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      time = #{record.time,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="top.whattowatch.wtw.po.HistoricalRecords" >
+    update historical_records
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtitle != null" >
+        mTitle = #{mtitle,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where hrId = #{hrid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="top.whattowatch.wtw.po.HistoricalRecords" >
+    update historical_records
+    set userId = #{userid,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP},
+      mTitle = #{mtitle,jdbcType=LONGVARCHAR}
+    where hrId = #{hrid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.whattowatch.wtw.po.HistoricalRecords" >
+    update historical_records
+    set userId = #{userid,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP}
+    where hrId = #{hrid,jdbcType=INTEGER}
+  </update>
+</mapper>
