@@ -18,7 +18,7 @@ spring:
         platform: mysql
         url: jdbc:mysql://127.0.0.1:3306/wtw?useUnicode=true&characterEncoding=utf-8&useSSL=false
         username: root
-        password: root
+        password: 123456
         initialSize: 5
         minIdle: 5
         maxActive: 20
@@ -44,6 +44,17 @@ spring:
       returnPageInfo: check
   #启动服务
   server:
-      port: 8080
+      port: 8081
+  application:
+    name: Spring Boot Client
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
 logging:
   file: log/wtw.log
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
