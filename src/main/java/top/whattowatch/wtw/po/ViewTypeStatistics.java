@@ -1,28 +1,28 @@
 package top.whattowatch.wtw.po;
 
 public class ViewTypeStatistics {
-    private Integer vtsid;
+    private Integer vtsId;
 
-    private Integer userid;
+    private Integer userId;
 
     private Integer times;
 
-    private String mtype;
+    private String mType;
 
-    public Integer getVtsid() {
-        return vtsid;
+    public Integer getVtsId() {
+        return vtsId;
     }
 
-    public void setVtsid(Integer vtsid) {
-        this.vtsid = vtsid;
+    public void setVtsId(Integer vtsId) {
+        this.vtsId = vtsId;
     }
 
-    public Integer getUserid() {
-        return userid;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getTimes() {
@@ -33,11 +33,11 @@ public class ViewTypeStatistics {
         this.times = times;
     }
 
-    public String getMtype() {
-        return mtype;
+    public String getmType() {
+        return mType;
     }
 
-    public void setMtype(String mtype) {
-        this.mtype = mtype == null ? null : mtype.trim();
+    public void setmType(String mType) {
+        this.mType = mType == null ? null : mType.trim();
     }
 }

@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="top.whattowatch.wtw.mapper.UserMapper" >
   <resultMap id="BaseResultMap" type="top.whattowatch.wtw.po.User" >
-    <id column="userId" property="userid" jdbcType="INTEGER" />
-    <result column="nickName" property="nickname" jdbcType="VARCHAR" />
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -64,7 +64,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    userId, nickName
+    user_id, nickname
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="top.whattowatch.wtw.po.UserExample" >
     select
@@ -84,11 +84,11 @@
     select 
     <include refid="Base_Column_List" />
     from user
-    where userId = #{userid,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user
-    where userId = #{userid,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="top.whattowatch.wtw.po.UserExample" >
     delete from user
@@ -97,22 +97,22 @@
     </if>
   </delete>
   <insert id="insert" parameterType="top.whattowatch.wtw.po.User" >
-    insert into user (userId, nickName)
-    values (#{userid,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR})
+    insert into user (user_id, nickname)
+    values (#{userId,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="top.whattowatch.wtw.po.User" >
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userid != null" >
-        userId,
+      <if test="userId != null" >
+        user_id,
       </if>
       <if test="nickname != null" >
-        nickName,
+        nickname,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userid != null" >
-        #{userid,jdbcType=INTEGER},
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="nickname != null" >
         #{nickname,jdbcType=VARCHAR},
@@ -128,11 +128,11 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update user
     <set >
-      <if test="record.userid != null" >
-        userId = #{record.userid,jdbcType=INTEGER},
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
       <if test="record.nickname != null" >
-        nickName = #{record.nickname,jdbcType=VARCHAR},
+        nickname = #{record.nickname,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -141,8 +141,8 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update user
-    set userId = #{record.userid,jdbcType=INTEGER},
-      nickName = #{record.nickname,jdbcType=VARCHAR}
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      nickname = #{record.nickname,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -151,14 +151,14 @@
     update user
     <set >
       <if test="nickname != null" >
-        nickName = #{nickname,jdbcType=VARCHAR},
+        nickname = #{nickname,jdbcType=VARCHAR},
       </if>
     </set>
-    where userId = #{userid,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="top.whattowatch.wtw.po.User" >
     update user
-    set nickName = #{nickname,jdbcType=VARCHAR}
-    where userId = #{userid,jdbcType=INTEGER}
+    set nickname = #{nickname,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

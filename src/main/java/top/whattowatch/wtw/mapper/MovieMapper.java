@@ -1,5 +1,6 @@
 package top.whattowatch.wtw.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import top.whattowatch.wtw.po.Movie;
@@ -10,7 +11,7 @@ public interface MovieMapper {
 
     int deleteByExample(MovieExample example);
 
-    int deleteByPrimaryKey(Integer movieid);
+    int deleteByPrimaryKey(Integer movieId);
 
     int insert(Movie record);
 
@@ -20,7 +21,7 @@ public interface MovieMapper {
 
     List<Movie> selectByExample(MovieExample example);
 
-    Movie selectByPrimaryKey(Integer movieid);
+    Movie selectByPrimaryKey(Integer movieId);
 
     int updateByExampleSelective(@Param("record") Movie record, @Param("example") MovieExample example);
 
@@ -31,5 +32,6 @@ public interface MovieMapper {
     int updateByPrimaryKeySelective(Movie record);
 
     int updateByPrimaryKeyWithBLOBs(Movie record);
-    int insertBatch(List<Movie> movies);
+
+    int insertBatch(ArrayList<Movie> movies);
 }

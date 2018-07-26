@@ -1,7 +1,7 @@
 package top.whattowatch.wtw.po;
 
 public class Movie {
-    private Integer movieid;
+    private Integer movieId;
 
     private String title;
 
@@ -15,12 +15,12 @@ public class Movie {
 
     private String types;
 
-    public Integer getMovieid() {
-        return movieid;
+    public Integer getMovieId() {
+        return movieId;
     }
 
-    public void setMovieid(Integer movieid) {
-        this.movieid = movieid;
+    public void setMovieId(Integer movieId) {
+        this.movieId = movieId;
     }
 
     public String getTitle() {

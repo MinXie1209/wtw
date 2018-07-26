@@ -104,63 +104,63 @@ public class MovieExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andMovieidIsNull() {
-            addCriterion("movieId is null");
+        public Criteria andMovieIdIsNull() {
+            addCriterion("movie_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andMovieidIsNotNull() {
-            addCriterion("movieId is not null");
+        public Criteria andMovieIdIsNotNull() {
+            addCriterion("movie_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMovieidEqualTo(Integer value) {
-            addCriterion("movieId =", value, "movieid");
+        public Criteria andMovieIdEqualTo(Integer value) {
+            addCriterion("movie_id =", value, "movieId");
             return (Criteria) this;
         }
 
-        public Criteria andMovieidNotEqualTo(Integer value) {
-            addCriterion("movieId <>", value, "movieid");
+        public Criteria andMovieIdNotEqualTo(Integer value) {
+            addCriterion("movie_id <>", value, "movieId");
             return (Criteria) this;
         }
 
-        public Criteria andMovieidGreaterThan(Integer value) {
-            addCriterion("movieId >", value, "movieid");
+        public Criteria andMovieIdGreaterThan(Integer value) {
+            addCriterion("movie_id >", value, "movieId");
             return (Criteria) this;
         }
 
-        public Criteria andMovieidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("movieId >=", value, "movieid");
+        public Criteria andMovieIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("movie_id >=", value, "movieId");
             return (Criteria) this;
         }
 
-        public Criteria andMovieidLessThan(Integer value) {
-            addCriterion("movieId <", value, "movieid");
+        public Criteria andMovieIdLessThan(Integer value) {
+            addCriterion("movie_id <", value, "movieId");
             return (Criteria) this;
         }
 
-        public Criteria andMovieidLessThanOrEqualTo(Integer value) {
-            addCriterion("movieId <=", value, "movieid");
+        public Criteria andMovieIdLessThanOrEqualTo(Integer value) {
+            addCriterion("movie_id <=", value, "movieId");
             return (Criteria) this;
         }
 
-        public Criteria andMovieidIn(List<Integer> values) {
-            addCriterion("movieId in", values, "movieid");
+        public Criteria andMovieIdIn(List<Integer> values) {
+            addCriterion("movie_id in", values, "movieId");
             return (Criteria) this;
         }
 
-        public Criteria andMovieidNotIn(List<Integer> values) {
-            addCriterion("movieId not in", values, "movieid");
+        public Criteria andMovieIdNotIn(List<Integer> values) {
+            addCriterion("movie_id not in", values, "movieId");
             return (Criteria) this;
         }
 
-        public Criteria andMovieidBetween(Integer value1, Integer value2) {
-            addCriterion("movieId between", value1, value2, "movieid");
+        public Criteria andMovieIdBetween(Integer value1, Integer value2) {
+            addCriterion("movie_id between", value1, value2, "movieId");
             return (Criteria) this;
         }
 
-        public Criteria andMovieidNotBetween(Integer value1, Integer value2) {
-            addCriterion("movieId not between", value1, value2, "movieid");
+        public Criteria andMovieIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("movie_id not between", value1, value2, "movieId");
             return (Criteria) this;
         }
     }

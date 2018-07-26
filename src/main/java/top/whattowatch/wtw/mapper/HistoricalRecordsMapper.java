@@ -10,7 +10,7 @@ public interface HistoricalRecordsMapper {
 
     int deleteByExample(HistoricalRecordsExample example);
 
-    int deleteByPrimaryKey(Integer hrid);
+    int deleteByPrimaryKey(Integer hrId);
 
     int insert(HistoricalRecords record);
 
@@ -20,7 +20,7 @@ public interface HistoricalRecordsMapper {
 
     List<HistoricalRecords> selectByExample(HistoricalRecordsExample example);
 
-    HistoricalRecords selectByPrimaryKey(Integer hrid);
+    HistoricalRecords selectByPrimaryKey(Integer hrId);
 
     int updateByExampleSelective(@Param("record") HistoricalRecords record, @Param("example") HistoricalRecordsExample example);
 

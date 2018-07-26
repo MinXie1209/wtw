@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="top.whattowatch.wtw.mapper.MovieMapper" >
   <resultMap id="BaseResultMap" type="top.whattowatch.wtw.po.Movie" >
-    <id column="movieId" property="movieid" jdbcType="INTEGER" />
+    <id column="movie_id" property="movieId" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="top.whattowatch.wtw.po.Movie" extends="BaseResultMap" >
     <result column="title" property="title" jdbcType="LONGVARCHAR" />
@@ -71,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    movieId
+    movie_id
   </sql>
   <sql id="Blob_Column_List" >
     title, introduction, cover, resources, url, types
@@ -112,11 +112,11 @@
     ,
     <include refid="Blob_Column_List" />
     from movie
-    where movieId = #{movieid,jdbcType=INTEGER}
+    where movie_id = #{movieId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from movie
-    where movieId = #{movieid,jdbcType=INTEGER}
+    where movie_id = #{movieId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="top.whattowatch.wtw.po.MovieExample" >
     delete from movie
@@ -125,18 +125,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="top.whattowatch.wtw.po.Movie" >
-    insert into movie (movieId, title, introduction, 
+    insert into movie (movie_id, title, introduction, 
       cover, resources, url, 
       types)
-    values (#{movieid,jdbcType=INTEGER}, #{title,jdbcType=LONGVARCHAR}, #{introduction,jdbcType=LONGVARCHAR}, 
+    values (#{movieId,jdbcType=INTEGER}, #{title,jdbcType=LONGVARCHAR}, #{introduction,jdbcType=LONGVARCHAR}, 
       #{cover,jdbcType=LONGVARCHAR}, #{resources,jdbcType=LONGVARCHAR}, #{url,jdbcType=LONGVARCHAR}, 
       #{types,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="top.whattowatch.wtw.po.Movie" >
     insert into movie
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="movieid != null" >
-        movieId,
+      <if test="movieId != null" >
+        movie_id,
       </if>
       <if test="title != null" >
         title,
@@ -158,8 +158,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="movieid != null" >
-        #{movieid,jdbcType=INTEGER},
+      <if test="movieId != null" >
+        #{movieId,jdbcType=INTEGER},
       </if>
       <if test="title != null" >
         #{title,jdbcType=LONGVARCHAR},
@@ -181,11 +181,12 @@
       </if>
     </trim>
   </insert>
+
   <insert id="insertBatch" parameterType="java.util.List" >
-    insert into movie(movieId,title,introduction,cover,resources,url,types)
+    insert into movie(title,introduction,cover,resources,url,types)
     values
     <foreach collection="list" item="item" index="index" separator=",">
-      (#{item.movieId},#{item.title},#{item.introduction},#{item.cover},#{item.resources},#{item.url,#{item.types)
+      (#{item.title},#{item.introduction},#{item.cover},#{item.resources},#{item.url},#{item.types})
     </foreach>
   </insert>
   <select id="countByExample" parameterType="top.whattowatch.wtw.po.MovieExample" resultType="java.lang.Integer" >
@@ -197,8 +198,8 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update movie
     <set >
-      <if test="record.movieid != null" >
-        movieId = #{record.movieid,jdbcType=INTEGER},
+      <if test="record.movieId != null" >
+        movie_id = #{record.movieId,jdbcType=INTEGER},
       </if>
       <if test="record.title != null" >
         title = #{record.title,jdbcType=LONGVARCHAR},
@@ -225,7 +226,7 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map" >
     update movie
-    set movieId = #{record.movieid,jdbcType=INTEGER},
+    set movie_id = #{record.movieId,jdbcType=INTEGER},
       title = #{record.title,jdbcType=LONGVARCHAR},
       introduction = #{record.introduction,jdbcType=LONGVARCHAR},
       cover = #{record.cover,jdbcType=LONGVARCHAR},
@@ -238,7 +239,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update movie
-    set movieId = #{record.movieid,jdbcType=INTEGER}
+    set movie_id = #{record.movieId,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -265,7 +266,7 @@
         types = #{types,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where movieId = #{movieid,jdbcType=INTEGER}
+    where movie_id = #{movieId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="top.whattowatch.wtw.po.Movie" >
     update movie
@@ -275,6 +276,6 @@
       resources = #{resources,jdbcType=LONGVARCHAR},
       url = #{url,jdbcType=LONGVARCHAR},
       types = #{types,jdbcType=LONGVARCHAR}
-    where movieId = #{movieid,jdbcType=INTEGER}
+    where movie_id = #{movieId,jdbcType=INTEGER}
   </update>
 </mapper>

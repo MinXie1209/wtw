@@ -10,7 +10,7 @@ public interface ViewTypeStatisticsMapper {
 
     int deleteByExample(ViewTypeStatisticsExample example);
 
-    int deleteByPrimaryKey(Integer vtsid);
+    int deleteByPrimaryKey(Integer vtsId);
 
     int insert(ViewTypeStatistics record);
 
@@ -20,7 +20,7 @@ public interface ViewTypeStatisticsMapper {
 
     List<ViewTypeStatistics> selectByExample(ViewTypeStatisticsExample example);
 
-    ViewTypeStatistics selectByPrimaryKey(Integer vtsid);
+    ViewTypeStatistics selectByPrimaryKey(Integer vtsId);
 
     int updateByExampleSelective(@Param("record") ViewTypeStatistics record, @Param("example") ViewTypeStatisticsExample example);
 

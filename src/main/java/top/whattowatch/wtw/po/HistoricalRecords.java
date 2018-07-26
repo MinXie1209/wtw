@@ -3,28 +3,28 @@ package top.whattowatch.wtw.po;
 import java.util.Date;
 
 public class HistoricalRecords {
-    private Integer hrid;
+    private Integer hrId;
 
-    private Integer userid;
+    private Integer userId;
 
     private Date time;
 
-    private String mtitle;
+    private String mTitle;
 
-    public Integer getHrid() {
-        return hrid;
+    public Integer getHrId() {
+        return hrId;
     }
 
-    public void setHrid(Integer hrid) {
-        this.hrid = hrid;
+    public void setHrId(Integer hrId) {
+        this.hrId = hrId;
     }
 
-    public Integer getUserid() {
-        return userid;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Date getTime() {
@@ -35,11 +35,11 @@ public class HistoricalRecords {
         this.time = time;
     }
 
-    public String getMtitle() {
-        return mtitle;
+    public String getmTitle() {
+        return mTitle;
     }
 
-    public void setMtitle(String mtitle) {
-        this.mtitle = mtitle == null ? null : mtitle.trim();
+    public void setmTitle(String mTitle) {
+        this.mTitle = mTitle == null ? null : mTitle.trim();
     }
 }
