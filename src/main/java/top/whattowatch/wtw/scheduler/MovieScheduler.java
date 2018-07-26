@@ -1,5 +1,6 @@
 package top.whattowatch.wtw.scheduler;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -20,12 +21,15 @@ public class MovieScheduler {
     @Autowired
     MovieMapper movieMapper;
 
-    @Scheduled(cron = "10 10 15 26/7 * ?")
+    @Scheduled(cron = "10 50 15 26/7 * ?")
     @Transactional(rollbackFor = Exception.class)
     public void start() {
         MoviePageProcessor moviePageProcessor = new MoviePageProcessor();
         ArrayList<Movie> movies = moviePageProcessor.main();
         movieMapper.deleteByExample(null);
-        movieMapper.insertBatch(movies);
+        if (movies.size() > 0) {
+            movieMapper.insertBatch(movies);
+        }
+
     }
 }

@@ -18,8 +18,9 @@ import java.util.List;
  * @desc 爬虫入口
  **/
 public class MoviePageProcessor implements PageProcessor {
-    private Site site = Site.me().setRetryTimes(3).setSleepTime(0).setUserAgent(
-            "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36").setTimeOut(2000);
+    private Site site = Site.me().setTimeOut(10000).
+            setRetryTimes(3).setSleepTime(100).setDomain("http://www.dytt8.net").
+            setUserAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36");
     private static volatile ArrayList<String> oldUrls = new ArrayList<String>();
     static long num = 0;
     static long queueNum = 0;
@@ -27,7 +28,7 @@ public class MoviePageProcessor implements PageProcessor {
 
     public ArrayList<Movie> main() {
         Spider.create(new MoviePageProcessor()).addUrl("http://www.dytt8.net")
-                .thread(200).run();
+                .thread(400).run();
         return movieList;
     }
 
@@ -79,7 +80,7 @@ public class MoviePageProcessor implements PageProcessor {
             movieList.add(movie);
         }
         for (String newUrl : page.getHtml().links().all()) {
-            if (!oldUrls.contains(newUrl) && newUrl.matches("http://www.dytt8.net/(.*).html") && movieList.size() < 300) {
+            if (!oldUrls.contains(newUrl) && newUrl.matches("http://www.dytt8.net/(.*).html") ) {
                 page.addTargetRequest(new Request(newUrl));
             }
         }
