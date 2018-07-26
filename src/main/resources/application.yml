@@ -1,4 +1,10 @@
 spring:
+  application:
+    name: Spring Boot Client
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
   redis:
     database: 1
     host: localhost
@@ -31,26 +37,20 @@ spring:
         testOnReturn: false
         filters: stat,wall,log4j
         logSlowSql: true
-  #mybatis
-  mybatis:
-    type-aliases-package: top.whattowatch.wtw.po
-    mapper-locations: classpath:mapping/*.xml
-  #pagehelper
-  pagehelper:
-      helperDialect: mysql
-      reasonable: true
-      supportMethodsArguments: true
-      params: count=countSql
-      returnPageInfo: check
-  #启动服务
-  server:
-      port: 8081
-  application:
-    name: Spring Boot Client
-  boot:
-    admin:
-      client:
-        url: http://localhost:8080
+#mybatis
+mybatis:
+  type-aliases-package: top.whattowatch.wtw.po
+  mapper-locations: classpath:mapping/*.xml
+#pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+  returnPageInfo: check
+#启动服务
+server:
+  port: 8080
 logging:
   file: log/wtw.log
 management:
