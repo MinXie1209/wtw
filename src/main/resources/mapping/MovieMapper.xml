@@ -181,6 +181,13 @@
       </if>
     </trim>
   </insert>
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into movie(movieId,title,introduction,cover,resources,url,types)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.movieId},#{item.title},#{item.introduction},#{item.cover},#{item.resources},#{item.url,#{item.types)
+    </foreach>
+  </insert>
   <select id="countByExample" parameterType="top.whattowatch.wtw.po.MovieExample" resultType="java.lang.Integer" >
     select count(*) from movie
     <if test="_parameter != null" >

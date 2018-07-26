@@ -31,4 +31,5 @@ public interface MovieMapper {
     int updateByPrimaryKeySelective(Movie record);
 
     int updateByPrimaryKeyWithBLOBs(Movie record);
+    int insertBatch(List<Movie> movies);
 }
