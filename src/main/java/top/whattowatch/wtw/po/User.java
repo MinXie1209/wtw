@@ -1,16 +1,16 @@
 package top.whattowatch.wtw.po;
 
 public class User {
-    private Integer userId;
+    private String userId;
 
     private String nickname;
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
     public String getNickname() {

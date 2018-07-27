@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS `historical_records`;
 
 CREATE TABLE `historical_records` (
   `hr_id` int(11) NOT NULL auto_increment,
-  `user_id` int(11) default NULL,
+  `user_id` varchar(50) collate utf8_unicode_ci default NULL,
   `m_title` mediumtext collate utf8_unicode_ci,
   `time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`hr_id`),
@@ -50,7 +50,7 @@ CREATE TABLE `movie` (
 DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL COMMENT '用户id',
+  `user_id` varchar(50) collate utf8_unicode_ci NOT NULL COMMENT '用户id',
   `nickname` varchar(500) collate utf8_unicode_ci default NULL COMMENT '昵称',
   PRIMARY KEY  (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -61,7 +61,7 @@ DROP TABLE IF EXISTS `view_type_statistics`;
 
 CREATE TABLE `view_type_statistics` (
   `vts_id` int(11) NOT NULL auto_increment,
-  `user_id` int(11) default NULL,
+  `user_id` varchar(50) collate utf8_unicode_ci default NULL,
   `m_type` mediumtext collate utf8_unicode_ci,
   `times` mediumint(9) default NULL,
   PRIMARY KEY  (`vts_id`),

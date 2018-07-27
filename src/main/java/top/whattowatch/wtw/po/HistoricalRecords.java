@@ -5,7 +5,7 @@ import java.util.Date;
 public class HistoricalRecords {
     private Integer hrId;
 
-    private Integer userId;
+    private String userId;
 
     private Date time;
 
@@ -19,12 +19,12 @@ public class HistoricalRecords {
         this.hrId = hrId;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
     public Date getTime() {
