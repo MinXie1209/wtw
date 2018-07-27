@@ -21,6 +21,12 @@ public class MovieScheduler {
     @Autowired
     MovieMapper movieMapper;
 
+    /**
+     * 1.定时爬取电影资源
+     * 2.清空movie表内容
+     * 3.插入爬取的资源
+     * 4.遍历movie-types,更新redis中存储的电影类别
+     */
     @Scheduled(cron = "10 50 15 26/7 * ?")
     @Transactional(rollbackFor = Exception.class)
     public void start() {
@@ -30,6 +36,7 @@ public class MovieScheduler {
         if (movies.size() > 0) {
             movieMapper.insertBatch(movies);
         }
+
 
     }
 }
