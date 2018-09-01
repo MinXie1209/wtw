@@ -1,0 +1,2 @@
+随机查询
+SELECT * FROM movie  AS m1  JOIN (SELECT ROUND(RAND() * ((SELECT MAX(movie_id) FROM `movie`)-(SELECT MIN(movie_id) FROM movie))+(SELECT MIN(movie_id) FROM movie)) AS movie_id) AS m2 WHERE m1.movie_id >= m2.movie_id ORDER BY m1.movie_id LIMIT 1
