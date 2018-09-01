@@ -1,0 +1,1 @@
+package top.whattowatch.wtw.app;/** * @author 江南小俊 * @create 2018-07-27 12:08 * @desc 小程序参数 **/public class App {    public static final String APPID = "APPID";    public static final String APPSECRET = "APPSECRET";    public static final String URL="https://api.weixin.qq.com/sns/jscode2session";}
