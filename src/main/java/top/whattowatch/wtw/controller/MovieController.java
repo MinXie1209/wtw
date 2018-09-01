@@ -22,7 +22,7 @@ public class MovieController {
     @TokenValid
     @RequestMapping(value = "/movies", method = RequestMethod.GET)
     public Object selectByTypesOrRand(@RequestParam(value = "types",required = false) String types)  throws Exception{
-        return movieService.selectByTypesOrRand(types);
+        return movieService.getByTypesOrRand(types);
     }
     /**
      * 根据id获取电影信息
@@ -30,7 +30,7 @@ public class MovieController {
     @TokenValid
     @RequestMapping(value = "/movies/{movieId}", method = RequestMethod.GET)
     public Object selectByTypesOrRand(@PathVariable(value = "movieId",required = true) Integer movieId)  throws Exception{
-        return movieService.selectByMovieId(movieId);
+        return movieService.getByMovieId(movieId);
     }
 
     /**
@@ -43,7 +43,7 @@ public class MovieController {
     @RequestMapping(value = "/title/movies", method = RequestMethod.GET)
     public  Object selectByTitle(@RequestParam(value = "mTitle",required = true) String mTitle,@RequestParam(value ="pageSize",defaultValue ="5")int pageSize
             ,@RequestParam(value ="pageNum",defaultValue ="1")int pageNum) throws Exception{
-        return movieService.selectByTitle(mTitle,pageSize,pageNum);
+        return movieService.listByTitle(mTitle,pageSize,pageNum);
     }
 
     /**
@@ -59,6 +59,6 @@ public class MovieController {
     @RequestMapping(value = "/recommend/movies", method = RequestMethod.GET)
     public Result recommendMovieByUserId(@RequestParam(value = "userId",required = true) String userId, @RequestParam(value ="pageSize",defaultValue ="5")int pageSize
             , @RequestParam(value ="pageNum",defaultValue ="1")int pageNum) throws Exception{
-        return movieService.recommendMovieByUserId(userId,pageSize,pageNum);
+        return movieService.listRecommendMovieByUserId(userId,pageSize,pageNum);
     }
 }

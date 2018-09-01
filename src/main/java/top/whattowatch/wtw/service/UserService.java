@@ -10,6 +10,11 @@ import top.whattowatch.wtw.po.WeChatApplet;
  * @Description:
  */
 public interface UserService {
+    /**
+     * 用户登录接口
+     * @param code
+     * @return
+     */
     Result login(String code);
 
 

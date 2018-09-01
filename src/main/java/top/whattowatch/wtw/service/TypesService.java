@@ -9,6 +9,10 @@ import top.whattowatch.wtw.po.Result;
  * @Description:
  */
 public interface TypesService {
+    /**
+     * 获取电影所有类型
+     * @return
+     */
     @Cacheable(value = "movie",key = "#root.targetClass+#root.methodName",unless = "#result eq null ")
-    Result selectTypes();
+    Result listTypes();
 }

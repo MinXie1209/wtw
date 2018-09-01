@@ -26,13 +26,13 @@ public class MovieServiceImpl implements MovieService {
     @Autowired
     ViewTypeStatisticsMapper viewTypeStatisticsMapper;
     @Override
-    public Result selectByTypesOrRand(String types) {
+    public Result getByTypesOrRand(String types) {
 
         return ResultUtils.success(movieMapper.selectByTypesOrRand(types));
     }
 
     @Override
-    public Result selectByMovieId(Integer movieId) {
+    public Result getByMovieId(Integer movieId) {
         System.out.println("未缓存");
         Movie movie=movieMapper.selectByPrimaryKey(movieId);
         if (movie==null){
@@ -44,7 +44,7 @@ public class MovieServiceImpl implements MovieService {
 
 
     @Override
-    public Result selectByTitle(String mTitle, Integer pageSize, Integer pageNum) {
+    public Result listByTitle(String mTitle, Integer pageSize, Integer pageNum) {
         System.out.println("未缓存");
         MovieExample movieExample=new MovieExample();
         MovieExample.Criteria criteria=movieExample.createCriteria();
@@ -66,7 +66,7 @@ public class MovieServiceImpl implements MovieService {
      * @return
      */
     @Override
-    public Result recommendMovieByUserId(String userId, int pageSize, int pageNum) {
+    public Result listRecommendMovieByUserId(String userId, int pageSize, int pageNum) {
         ViewTypeStatisticsExample viewTypeStatisticsExample=new ViewTypeStatisticsExample();
         ViewTypeStatisticsExample.Criteria criteria=viewTypeStatisticsExample.createCriteria();
         criteria.andUserIdEqualTo(userId);

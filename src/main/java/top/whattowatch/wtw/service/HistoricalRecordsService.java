@@ -9,8 +9,20 @@ import top.whattowatch.wtw.po.Result;
  * @Description:
  */
 public interface HistoricalRecordsService {
+    /**
+     * 通过用户id获取观影历史记录(多条)
+     * @param userId
+     * @return
+     */
     @Cacheable(value = "movie",key = "#root.targetClass+#root.methodName+#userId",unless = "#result eq null ")
-    Result selectByUserId(String userId);
+    Result listHistoricalRecordsByUserId(String userId);
 
-    Result addHistoricalRecord(String userId, String mTitle, String types);
+    /**
+     * 保存用户的观影记录
+     * @param userId
+     * @param mTitle
+     * @param types
+     * @return
+     */
+    Result saveHistoricalRecord(String userId, String mTitle, String types);
 }

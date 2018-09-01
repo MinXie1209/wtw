@@ -25,7 +25,7 @@ public class HistoricalRecordsServiceImpl implements HistoricalRecordsService {
     ViewTypeStatisticsMapper viewTypeStatisticsMapper;
 
     @Override
-    public Result selectByUserId(String userId) {
+    public Result listHistoricalRecordsByUserId(String userId) {
         System.out.println("未缓存");
         HistoricalRecordsExample historicalRecordsExample = new HistoricalRecordsExample();
         HistoricalRecordsExample.Criteria criteria = historicalRecordsExample.createCriteria();
@@ -41,7 +41,7 @@ public class HistoricalRecordsServiceImpl implements HistoricalRecordsService {
     }
 
     @Override
-    public Result addHistoricalRecord(String userId, String mTitle, String types) {
+    public Result saveHistoricalRecord(String userId, String mTitle, String types) {
         historicalRecordsMapper.insertSelective(new HistoricalRecords(userId, mTitle));
         for (String type : types.split("/")) {
             ViewTypeStatisticsExample example = new ViewTypeStatisticsExample();

@@ -24,6 +24,6 @@ public class ViewTypeStatisticsController {
     @TokenValid
     @RequestMapping("/view_type_statistics")
     public Object selectByUserId(@RequestParam(required = true)String userId)  throws Exception{
-            return viewTypeStatisticsService.selectByUserId(userId);
+            return viewTypeStatisticsService.listByUserId(userId);
     }
 }

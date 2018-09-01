@@ -17,7 +17,7 @@ public class TypesServiceImpl implements TypesService {
     @Autowired
     TypesMapper typesMapper;
     @Override
-    public Result selectTypes() {
+    public Result listTypes() {
         System.out.println("未缓存");
         return ResultUtils.success(typesMapper.selectByExample(null));
     }

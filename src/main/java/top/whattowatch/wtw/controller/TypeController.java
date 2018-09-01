@@ -18,7 +18,7 @@ public class TypeController {
     @TokenValid
     @RequestMapping(value = "/types", method = RequestMethod.GET)
     public Object selectTypes() throws Exception{
-        return typesService.selectTypes();
+        return typesService.listTypes();
     }
 
 }

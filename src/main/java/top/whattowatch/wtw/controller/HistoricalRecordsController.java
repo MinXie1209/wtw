@@ -27,7 +27,7 @@ public class HistoricalRecordsController {
     @TokenValid
     @RequestMapping("/historical_records")
     public Object selectByUserId(@RequestParam(value = "userId",required = true)String userId) throws Exception{
-            return historicalRecordsService.selectByUserId(userId);
+            return historicalRecordsService.listHistoricalRecordsByUserId(userId);
     }
 
     /**
@@ -41,6 +41,6 @@ public class HistoricalRecordsController {
     public Object addHistoricalRecord(@RequestParam(value = "userId",required = true)String userId,
                                       @RequestParam(value = "mTitle",required = true)String mTitle,
                                       @RequestParam(value = "types",required = true)String types) throws Exception{
-        return historicalRecordsService.addHistoricalRecord(userId,mTitle,types);
+        return historicalRecordsService.saveHistoricalRecord(userId,mTitle,types);
     }
 }

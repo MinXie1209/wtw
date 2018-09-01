@@ -24,7 +24,7 @@ public class ViewTypeStatisticsServiceImpl implements ViewTypeStatisticsService 
     ViewTypeStatisticsMapper viewTypeStatisticsMapper;
 
     @Override
-    public Result selectByUserId(String userId) {
+    public Result listByUserId(String userId) {
         System.out.println("未缓存");
         ViewTypeStatisticsExample example=new ViewTypeStatisticsExample();
         ViewTypeStatisticsExample.Criteria criteria=example.createCriteria();

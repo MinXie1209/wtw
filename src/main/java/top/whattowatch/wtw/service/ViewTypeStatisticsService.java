@@ -9,6 +9,11 @@ import top.whattowatch.wtw.po.Result;
  * @Description:
  */
 public interface ViewTypeStatisticsService {
+    /**
+     * 根据用户id查询用户的观影类型记录
+     * @param userId
+     * @return
+     */
     @Cacheable(value = "user",key = "#root.targetClass+'_'+#userId",unless = "#result eq null ")
-    Result selectByUserId(String userId);
+    Result listByUserId(String userId);
 }
