@@ -234,6 +234,76 @@ public class ViewTypeStatisticsExample {
             return (Criteria) this;
         }
 
+        public Criteria andMTypeIsNull() {
+            addCriterion("m_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMTypeIsNotNull() {
+            addCriterion("m_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMTypeEqualTo(String value) {
+            addCriterion("m_type =", value, "mType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMTypeNotEqualTo(String value) {
+            addCriterion("m_type <>", value, "mType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMTypeGreaterThan(String value) {
+            addCriterion("m_type >", value, "mType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("m_type >=", value, "mType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMTypeLessThan(String value) {
+            addCriterion("m_type <", value, "mType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMTypeLessThanOrEqualTo(String value) {
+            addCriterion("m_type <=", value, "mType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMTypeLike(String value) {
+            addCriterion("m_type like", value, "mType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMTypeNotLike(String value) {
+            addCriterion("m_type not like", value, "mType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMTypeIn(List<String> values) {
+            addCriterion("m_type in", values, "mType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMTypeNotIn(List<String> values) {
+            addCriterion("m_type not in", values, "mType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMTypeBetween(String value1, String value2) {
+            addCriterion("m_type between", value1, value2, "mType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMTypeNotBetween(String value1, String value2) {
+            addCriterion("m_type not between", value1, value2, "mType");
+            return (Criteria) this;
+        }
+
         public Criteria andTimesIsNull() {
             addCriterion("times is null");
             return (Criteria) this;

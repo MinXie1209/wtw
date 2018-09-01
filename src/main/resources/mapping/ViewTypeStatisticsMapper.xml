@@ -1,33 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="top.whattowatch.wtw.mapper.ViewTypeStatisticsMapper">
-  <resultMap id="BaseResultMap" type="top.whattowatch.wtw.po.ViewTypeStatistics">
-    <id column="vts_id" jdbcType="INTEGER" property="vtsId" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="times" jdbcType="INTEGER" property="times" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.whattowatch.wtw.mapper.ViewTypeStatisticsMapper" >
+  <resultMap id="BaseResultMap" type="top.whattowatch.wtw.po.ViewTypeStatistics" >
+    <id column="vts_id" property="vtsId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="m_type" property="mType" jdbcType="VARCHAR" />
+    <result column="times" property="times" jdbcType="INTEGER" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="top.whattowatch.wtw.po.ViewTypeStatistics">
-    <result column="m_type" jdbcType="LONGVARCHAR" property="mType" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -38,25 +36,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -67,397 +65,131 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
-    vts_id, user_id, times
+  <sql id="Base_Column_List" >
+    vts_id, user_id, m_type, times
   </sql>
-  <sql id="Blob_Column_List">
-    m_type
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="top.whattowatch.wtw.po.ViewTypeStatisticsExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="top.whattowatch.wtw.po.ViewTypeStatisticsExample" >
     select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from view_type_statistics
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByExample" parameterType="top.whattowatch.wtw.po.ViewTypeStatisticsExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
     from view_type_statistics
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from view_type_statistics
     where vts_id = #{vtsId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from view_type_statistics
     where vts_id = #{vtsId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="top.whattowatch.wtw.po.ViewTypeStatisticsExample">
+  <delete id="deleteByExample" parameterType="top.whattowatch.wtw.po.ViewTypeStatisticsExample" >
     delete from view_type_statistics
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="top.whattowatch.wtw.po.ViewTypeStatistics">
-    insert into view_type_statistics (vts_id, user_id, times, 
-      m_type)
-    values (#{vtsId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{times,jdbcType=INTEGER}, 
-      #{mType,jdbcType=LONGVARCHAR})
+  <insert id="insert" parameterType="top.whattowatch.wtw.po.ViewTypeStatistics" >
+    insert into view_type_statistics (vts_id, user_id, m_type, 
+      times)
+    values (#{vtsId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{mType,jdbcType=VARCHAR}, 
+      #{times,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="top.whattowatch.wtw.po.ViewTypeStatistics">
+  <insert id="insertSelective" parameterType="top.whattowatch.wtw.po.ViewTypeStatistics" >
     insert into view_type_statistics
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="vtsId != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vtsId != null" >
         vts_id,
       </if>
-      <if test="userId != null">
+      <if test="userId != null" >
         user_id,
       </if>
-      <if test="times != null">
-        times,
-      </if>
-      <if test="mType != null">
+      <if test="mType != null" >
         m_type,
       </if>
+      <if test="times != null" >
+        times,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="vtsId != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vtsId != null" >
         #{vtsId,jdbcType=INTEGER},
       </if>
-      <if test="userId != null">
+      <if test="userId != null" >
         #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="times != null">
-        #{times,jdbcType=INTEGER},
+      <if test="mType != null" >
+        #{mType,jdbcType=VARCHAR},
       </if>
-      <if test="mType != null">
-        #{mType,jdbcType=LONGVARCHAR},
+      <if test="times != null" >
+        #{times,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="top.whattowatch.wtw.po.ViewTypeStatisticsExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="top.whattowatch.wtw.po.ViewTypeStatisticsExample" resultType="java.lang.Integer" >
     select count(*) from view_type_statistics
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update view_type_statistics
-    <set>
-      <if test="record.vtsId != null">
+    <set >
+      <if test="record.vtsId != null" >
         vts_id = #{record.vtsId,jdbcType=INTEGER},
       </if>
-      <if test="record.userId != null">
+      <if test="record.userId != null" >
         user_id = #{record.userId,jdbcType=VARCHAR},
       </if>
-      <if test="record.times != null">
+      <if test="record.mType != null" >
+        m_type = #{record.mType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.times != null" >
         times = #{record.times,jdbcType=INTEGER},
       </if>
-      <if test="record.mType != null">
-        m_type = #{record.mType,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
+  <update id="updateByExample" parameterType="map" >
     update view_type_statistics
     set vts_id = #{record.vtsId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=VARCHAR},
-      times = #{record.times,jdbcType=INTEGER},
-      m_type = #{record.mType,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update view_type_statistics
-    set vts_id = #{record.vtsId,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=VARCHAR},
+      m_type = #{record.mType,jdbcType=VARCHAR},
       times = #{record.times,jdbcType=INTEGER}
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="top.whattowatch.wtw.po.ViewTypeStatistics">
+  <update id="updateByPrimaryKeySelective" parameterType="top.whattowatch.wtw.po.ViewTypeStatistics" >
     update view_type_statistics
-    <set>
-      <if test="userId != null">
+    <set >
+      <if test="userId != null" >
         user_id = #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="times != null">
+      <if test="mType != null" >
+        m_type = #{mType,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null" >
         times = #{times,jdbcType=INTEGER},
       </if>
-      <if test="mType != null">
-        m_type = #{mType,jdbcType=LONGVARCHAR},
-      </if>
     </set>
     where vts_id = #{vtsId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="top.whattowatch.wtw.po.ViewTypeStatistics">
+  <update id="updateByPrimaryKey" parameterType="top.whattowatch.wtw.po.ViewTypeStatistics" >
     update view_type_statistics
     set user_id = #{userId,jdbcType=VARCHAR},
-      times = #{times,jdbcType=INTEGER},
-      m_type = #{mType,jdbcType=LONGVARCHAR}
-    where vts_id = #{vtsId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="top.whattowatch.wtw.po.ViewTypeStatistics">
-    update view_type_statistics
-    set user_id = #{userId,jdbcType=VARCHAR},
-      times = #{times,jdbcType=INTEGER}
-    where vts_id = #{vtsId,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="top.whattowatch.wtw.po.ViewTypeStatistics">
-    <id column="vts_id" jdbcType="INTEGER" property="vtsId" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="times" jdbcType="INTEGER" property="times" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="top.whattowatch.wtw.po.ViewTypeStatistics">
-    <result column="m_type" jdbcType="LONGVARCHAR" property="mType" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    vts_id, user_id, times
-  </sql>
-  <sql id="Blob_Column_List">
-    m_type
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="top.whattowatch.wtw.po.ViewTypeStatisticsExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from view_type_statistics
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByExample" parameterType="top.whattowatch.wtw.po.ViewTypeStatisticsExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from view_type_statistics
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from view_type_statistics
-    where vts_id = #{vtsId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from view_type_statistics
-    where vts_id = #{vtsId,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="top.whattowatch.wtw.po.ViewTypeStatisticsExample">
-    delete from view_type_statistics
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="top.whattowatch.wtw.po.ViewTypeStatistics">
-    insert into view_type_statistics (vts_id, user_id, times, 
-      m_type)
-    values (#{vtsId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{times,jdbcType=INTEGER}, 
-      #{mType,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="top.whattowatch.wtw.po.ViewTypeStatistics">
-    insert into view_type_statistics
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="vtsId != null">
-        vts_id,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="times != null">
-        times,
-      </if>
-      <if test="mType != null">
-        m_type,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="vtsId != null">
-        #{vtsId,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="times != null">
-        #{times,jdbcType=INTEGER},
-      </if>
-      <if test="mType != null">
-        #{mType,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="top.whattowatch.wtw.po.ViewTypeStatisticsExample" resultType="java.lang.Integer">
-    select count(*) from view_type_statistics
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update view_type_statistics
-    <set>
-      <if test="record.vtsId != null">
-        vts_id = #{record.vtsId,jdbcType=INTEGER},
-      </if>
-      <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=INTEGER},
-      </if>
-      <if test="record.times != null">
-        times = #{record.times,jdbcType=INTEGER},
-      </if>
-      <if test="record.mType != null">
-        m_type = #{record.mType,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update view_type_statistics
-    set vts_id = #{record.vtsId,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER},
-      times = #{record.times,jdbcType=INTEGER},
-      m_type = #{record.mType,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update view_type_statistics
-    set vts_id = #{record.vtsId,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER},
-      times = #{record.times,jdbcType=INTEGER}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="top.whattowatch.wtw.po.ViewTypeStatistics">
-    update view_type_statistics
-    <set>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="times != null">
-        times = #{times,jdbcType=INTEGER},
-      </if>
-      <if test="mType != null">
-        m_type = #{mType,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where vts_id = #{vtsId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="top.whattowatch.wtw.po.ViewTypeStatistics">
-    update view_type_statistics
-    set user_id = #{userId,jdbcType=INTEGER},
-      times = #{times,jdbcType=INTEGER},
-      m_type = #{mType,jdbcType=LONGVARCHAR}
-    where vts_id = #{vtsId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="top.whattowatch.wtw.po.ViewTypeStatistics">
-    update view_type_statistics
-    set user_id = #{userId,jdbcType=INTEGER},
+      m_type = #{mType,jdbcType=VARCHAR},
       times = #{times,jdbcType=INTEGER}
     where vts_id = #{vtsId,jdbcType=INTEGER}
   </update>

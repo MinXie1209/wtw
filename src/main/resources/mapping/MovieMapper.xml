@@ -3,14 +3,12 @@
 <mapper namespace="top.whattowatch.wtw.mapper.MovieMapper" >
   <resultMap id="BaseResultMap" type="top.whattowatch.wtw.po.Movie" >
     <id column="movie_id" property="movieId" jdbcType="INTEGER" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="top.whattowatch.wtw.po.Movie" extends="BaseResultMap" >
-    <result column="title" property="title" jdbcType="LONGVARCHAR" />
-    <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
-    <result column="cover" property="cover" jdbcType="LONGVARCHAR" />
-    <result column="resources" property="resources" jdbcType="LONGVARCHAR" />
-    <result column="url" property="url" jdbcType="LONGVARCHAR" />
-    <result column="types" property="types" jdbcType="LONGVARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="cover" property="cover" jdbcType="VARCHAR" />
+    <result column="resources" property="resources" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="types" property="types" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -71,27 +69,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    movie_id
+    movie_id, title, introduction, cover, resources, url, types
   </sql>
-  <sql id="Blob_Column_List" >
-    title, introduction, cover, resources, url, types
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="top.whattowatch.wtw.po.MovieExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from movie
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="top.whattowatch.wtw.po.MovieExample" >
     select
     <if test="distinct" >
@@ -106,13 +85,23 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from movie
-    where movie_id = #{movieId,jdbcType=INTEGER}
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  select
+  <include refid="Base_Column_List" />
+  from movie
+  where movie_id = #{movieId,jdbcType=INTEGER}
+</select>
+  <select id="selectByTypesOrRand" resultMap="BaseResultMap" parameterType="java.lang.String" >
+      SELECT m1.`movie_id` movie_id,m1.`title` title,m1.`cover` cover,m1.`introduction` introduction,m1.`resources` resources,m1.`url` url,m1.`types` TYPES
+      FROM movie  AS m1  JOIN (SELECT ROUND(RAND() * ((SELECT MAX(movie_id) FROM `movie`)-(SELECT MIN(movie_id) FROM movie))+(SELECT MIN(movie_id) FROM movie)) AS movie_id) AS m2
+    WHERE
+    <if test="_parameter!=null">
+      types like concat(concat('%',#{_parameter}),'%') and
+    </if>
+     m1.movie_id >= m2.movie_id ORDER BY m1.movie_id LIMIT 1
+
+
+
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from movie
@@ -128,9 +117,9 @@
     insert into movie (movie_id, title, introduction, 
       cover, resources, url, 
       types)
-    values (#{movieId,jdbcType=INTEGER}, #{title,jdbcType=LONGVARCHAR}, #{introduction,jdbcType=LONGVARCHAR}, 
-      #{cover,jdbcType=LONGVARCHAR}, #{resources,jdbcType=LONGVARCHAR}, #{url,jdbcType=LONGVARCHAR}, 
-      #{types,jdbcType=LONGVARCHAR})
+    values (#{movieId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
+      #{cover,jdbcType=VARCHAR}, #{resources,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{types,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="top.whattowatch.wtw.po.Movie" >
     insert into movie
@@ -162,22 +151,22 @@
         #{movieId,jdbcType=INTEGER},
       </if>
       <if test="title != null" >
-        #{title,jdbcType=LONGVARCHAR},
+        #{title,jdbcType=VARCHAR},
       </if>
       <if test="introduction != null" >
-        #{introduction,jdbcType=LONGVARCHAR},
+        #{introduction,jdbcType=VARCHAR},
       </if>
       <if test="cover != null" >
-        #{cover,jdbcType=LONGVARCHAR},
+        #{cover,jdbcType=VARCHAR},
       </if>
       <if test="resources != null" >
-        #{resources,jdbcType=LONGVARCHAR},
+        #{resources,jdbcType=VARCHAR},
       </if>
       <if test="url != null" >
-        #{url,jdbcType=LONGVARCHAR},
+        #{url,jdbcType=VARCHAR},
       </if>
       <if test="types != null" >
-        #{types,jdbcType=LONGVARCHAR},
+        #{types,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -189,57 +178,62 @@
       (#{item.title},#{item.introduction},#{item.cover},#{item.resources},#{item.url},#{item.types})
     </foreach>
   </insert>
+
   <select id="countByExample" parameterType="top.whattowatch.wtw.po.MovieExample" resultType="java.lang.Integer" >
     select count(*) from movie
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+    <select id="recommendMovieByUserId" resultType="top.whattowatch.wtw.po.Movie">
+        SELECT m1.`movie_id` movieId,m1.`title` title,m1.`cover` cover,m1.`introduction` introduction,m1.`resources` resources,m1.`url` url,m1.`types` TYPES
+        FROM movie m1 JOIN (SELECT ROUND(RAND() * ((SELECT MAX(movie_id) FROM `movie`)-(SELECT MIN(movie_id) FROM movie))+(SELECT MIN(movie_id) FROM movie)) AS movie_id) AS m2
+      WHERE m1.movie_id >= m2.movie_id
+      <foreach collection="viewTypeStatistics" open="and(" close=")" separator="or" item="item">
+          m1.types like concat(concat('%',#{item.mType}),'%')
+      </foreach>
+      and m1.title NOT IN (SELECT m_title FROM historical_records WHERE user_id=#{userId})
+      ORDER BY m1.movie_id LIMIT #{pageSize}
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
     update movie
     <set >
       <if test="record.movieId != null" >
         movie_id = #{record.movieId,jdbcType=INTEGER},
       </if>
       <if test="record.title != null" >
-        title = #{record.title,jdbcType=LONGVARCHAR},
+        title = #{record.title,jdbcType=VARCHAR},
       </if>
       <if test="record.introduction != null" >
-        introduction = #{record.introduction,jdbcType=LONGVARCHAR},
+        introduction = #{record.introduction,jdbcType=VARCHAR},
       </if>
       <if test="record.cover != null" >
-        cover = #{record.cover,jdbcType=LONGVARCHAR},
+        cover = #{record.cover,jdbcType=VARCHAR},
       </if>
       <if test="record.resources != null" >
-        resources = #{record.resources,jdbcType=LONGVARCHAR},
+        resources = #{record.resources,jdbcType=VARCHAR},
       </if>
       <if test="record.url != null" >
-        url = #{record.url,jdbcType=LONGVARCHAR},
+        url = #{record.url,jdbcType=VARCHAR},
       </if>
       <if test="record.types != null" >
-        types = #{record.types,jdbcType=LONGVARCHAR},
+        types = #{record.types,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update movie
-    set movie_id = #{record.movieId,jdbcType=INTEGER},
-      title = #{record.title,jdbcType=LONGVARCHAR},
-      introduction = #{record.introduction,jdbcType=LONGVARCHAR},
-      cover = #{record.cover,jdbcType=LONGVARCHAR},
-      resources = #{record.resources,jdbcType=LONGVARCHAR},
-      url = #{record.url,jdbcType=LONGVARCHAR},
-      types = #{record.types,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByExample" parameterType="map" >
     update movie
-    set movie_id = #{record.movieId,jdbcType=INTEGER}
+    set movie_id = #{record.movieId,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      introduction = #{record.introduction,jdbcType=VARCHAR},
+      cover = #{record.cover,jdbcType=VARCHAR},
+      resources = #{record.resources,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      types = #{record.types,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -248,34 +242,34 @@
     update movie
     <set >
       <if test="title != null" >
-        title = #{title,jdbcType=LONGVARCHAR},
+        title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="introduction != null" >
-        introduction = #{introduction,jdbcType=LONGVARCHAR},
+        introduction = #{introduction,jdbcType=VARCHAR},
       </if>
       <if test="cover != null" >
-        cover = #{cover,jdbcType=LONGVARCHAR},
+        cover = #{cover,jdbcType=VARCHAR},
       </if>
       <if test="resources != null" >
-        resources = #{resources,jdbcType=LONGVARCHAR},
+        resources = #{resources,jdbcType=VARCHAR},
       </if>
       <if test="url != null" >
-        url = #{url,jdbcType=LONGVARCHAR},
+        url = #{url,jdbcType=VARCHAR},
       </if>
       <if test="types != null" >
-        types = #{types,jdbcType=LONGVARCHAR},
+        types = #{types,jdbcType=VARCHAR},
       </if>
     </set>
     where movie_id = #{movieId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="top.whattowatch.wtw.po.Movie" >
+  <update id="updateByPrimaryKey" parameterType="top.whattowatch.wtw.po.Movie" >
     update movie
-    set title = #{title,jdbcType=LONGVARCHAR},
-      introduction = #{introduction,jdbcType=LONGVARCHAR},
-      cover = #{cover,jdbcType=LONGVARCHAR},
-      resources = #{resources,jdbcType=LONGVARCHAR},
-      url = #{url,jdbcType=LONGVARCHAR},
-      types = #{types,jdbcType=LONGVARCHAR}
+    set title = #{title,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      cover = #{cover,jdbcType=VARCHAR},
+      resources = #{resources,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      types = #{types,jdbcType=VARCHAR}
     where movie_id = #{movieId,jdbcType=INTEGER}
   </update>
 </mapper>

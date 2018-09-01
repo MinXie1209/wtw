@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- xmlns=""声明名称空间 xsi:schemaLocation指定位置-->
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>top.whattowatch</groupId>
@@ -80,30 +81,18 @@
             <version>1.2.5</version>
         </dependency>
 
-        <!--springboot admin server开始-->
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-server</artifactId>
-            <version>2.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-server-ui</artifactId>
-            <version>2.0.1</version>
-        </dependency>
-        <!--springboot admin server结束-->
 
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
             <version>2.0.1</version>
         </dependency>
-        <!--  actuator插件可以通过暴露站点来输出应用的端点信息 -->
+        <!--  actuator插件可以通过暴露站点来输出应用的端点信息
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-
+-->
         <!-- webmagic爬虫框架开始 -->
         <dependency>
             <groupId>us.codecraft</groupId>
@@ -128,6 +117,23 @@
             </exclusions>
         </dependency>
         <!-- webmagic爬虫框架结束 -->
+        <!--spring的aop支持-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+
+        </dependency>
+        <!--aspectj支持-->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.8.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.5</version>
+        </dependency>
     </dependencies>
 
     <build>

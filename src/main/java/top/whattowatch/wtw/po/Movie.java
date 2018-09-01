@@ -1,6 +1,8 @@
 package top.whattowatch.wtw.po;
 
-public class Movie {
+import java.io.Serializable;
+
+public class Movie implements Serializable {
     private Integer movieId;
 
     private String title;

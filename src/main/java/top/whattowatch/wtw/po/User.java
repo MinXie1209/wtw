@@ -1,9 +1,23 @@
 package top.whattowatch.wtw.po;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String userId;
 
     private String nickname;
+
+    public User(String openid) {
+        this.userId=openid;
+    }
+
+    public User(String userId, String nickname) {
+        this.userId = userId;
+        this.nickname = nickname;
+    }
+
+    public User() {
+    }
 
     public String getUserId() {
         return userId;

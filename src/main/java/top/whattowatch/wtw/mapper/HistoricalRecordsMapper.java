@@ -16,21 +16,15 @@ public interface HistoricalRecordsMapper {
 
     int insertSelective(HistoricalRecords record);
 
-    List<HistoricalRecords> selectByExampleWithBLOBs(HistoricalRecordsExample example);
-
     List<HistoricalRecords> selectByExample(HistoricalRecordsExample example);
 
     HistoricalRecords selectByPrimaryKey(Integer hrId);
 
     int updateByExampleSelective(@Param("record") HistoricalRecords record, @Param("example") HistoricalRecordsExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") HistoricalRecords record, @Param("example") HistoricalRecordsExample example);
-
     int updateByExample(@Param("record") HistoricalRecords record, @Param("example") HistoricalRecordsExample example);
 
     int updateByPrimaryKeySelective(HistoricalRecords record);
-
-    int updateByPrimaryKeyWithBLOBs(HistoricalRecords record);
 
     int updateByPrimaryKey(HistoricalRecords record);
 }
