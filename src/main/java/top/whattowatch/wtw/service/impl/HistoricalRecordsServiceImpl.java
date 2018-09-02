@@ -3,6 +3,7 @@ package top.whattowatch.wtw.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import top.whattowatch.wtw.enums.ResultEnum;
 import top.whattowatch.wtw.mapper.HistoricalRecordsMapper;
 import top.whattowatch.wtw.mapper.ViewTypeStatisticsMapper;
@@ -40,6 +41,7 @@ public class HistoricalRecordsServiceImpl implements HistoricalRecordsService {
 
     }
 
+    @Transactional
     @Override
     public Result saveHistoricalRecord(String userId, String mTitle, String types) {
         historicalRecordsMapper.insertSelective(new HistoricalRecords(userId, mTitle));
