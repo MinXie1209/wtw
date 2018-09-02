@@ -40,7 +40,6 @@ public class HistoricalRecordsServiceImpl implements HistoricalRecordsService {
         }
 
     }
-
     @Transactional
     @Override
     public Result saveHistoricalRecord(String userId, String mTitle, String types) {
