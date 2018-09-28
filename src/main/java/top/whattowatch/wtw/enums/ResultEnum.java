@@ -11,8 +11,10 @@ public enum ResultEnum {
     ERROR_CODE(10002, "錯誤的code"),
     LOGIN_PLEASE(10003, "请登录"),
     NOT_VIEWMOVIES(10004, "你没有观影记录"),
-    NOT_MOVIE(10005, "没有此电影信息"), NOT_MOVIEBYTITLE(10006,"没有你要查找的电影" );
-
+    NOT_MOVIE(10005, "没有此电影信息"),
+    NOT_MOVIEBYTITLE(10006,"没有你要查找的电影" ),
+    NOT_COVER(10007,"没有找到图片"),
+    NULL_TITLE(10008,"没有传入正确的电影名");
 
     private Integer code;
     private String msg;
