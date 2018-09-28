@@ -7,8 +7,6 @@ public class Movie implements Serializable {
 
     private String title;
 
-    private String introduction;
-
     private String cover;
 
     private String resources;
@@ -16,6 +14,10 @@ public class Movie implements Serializable {
     private String url;
 
     private String types;
+
+    private String year;
+
+    private String introduction;
 
     public Integer getMovieId() {
         return movieId;
@@ -31,14 +33,6 @@ public class Movie implements Serializable {
 
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
-    }
-
-    public String getIntroduction() {
-        return introduction;
-    }
-
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction == null ? null : introduction.trim();
     }
 
     public String getCover() {
@@ -71,5 +65,21 @@ public class Movie implements Serializable {
 
     public void setTypes(String types) {
         this.types = types == null ? null : types.trim();
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year == null ? null : year.trim();
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction == null ? null : introduction.trim();
     }
 }
