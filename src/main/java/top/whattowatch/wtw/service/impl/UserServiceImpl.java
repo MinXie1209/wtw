@@ -2,14 +2,13 @@ package top.whattowatch.wtw.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import top.whattowatch.wtw.app.App;
+import top.whattowatch.wtw.constant.App;
 import top.whattowatch.wtw.enums.ResultEnum;
 import top.whattowatch.wtw.mapper.UserMapper;
 import top.whattowatch.wtw.po.Result;

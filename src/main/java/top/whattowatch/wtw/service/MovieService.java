@@ -42,4 +42,12 @@ public interface MovieService {
      * @return
      */
     Result listRecommendMovieByUserId(String userId, int pageSize, int pageNum);
+
+    /**
+     * 获取图片新链接并替换数据库
+     * @param mTitle
+     * @param movieId
+     * @return
+     */
+    Result getCover(String mTitle, Integer movieId);
 }

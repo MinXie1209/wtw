@@ -14,6 +14,6 @@ public interface ViewTypeStatisticsService {
      * @param userId
      * @return
      */
-    @Cacheable(value = "user",key = "#root.targetClass+'_'+#userId",unless = "#result eq null ")
+
     Result listByUserId(String userId);
 }

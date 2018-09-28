@@ -1,9 +1,7 @@
 package top.whattowatch.wtw.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import top.whattowatch.wtw.enums.ResultEnum;
 import top.whattowatch.wtw.mapper.MovieMapper;
@@ -11,6 +9,7 @@ import top.whattowatch.wtw.mapper.ViewTypeStatisticsMapper;
 import top.whattowatch.wtw.po.*;
 import top.whattowatch.wtw.service.MovieService;
 import top.whattowatch.wtw.utils.ResultUtils;
+import top.whattowatch.wtw.webmagic.CoverPageProcessor;
 
 import java.util.List;
 
@@ -38,6 +37,11 @@ public class MovieServiceImpl implements MovieService {
         if (movie==null){
             return ResultUtils.error(ResultEnum.NOT_MOVIE);
         }
+        else {
+            if(movie.getIntroduction()==null){
+                movie.setIntroduction("");
+            }
+        }
         return ResultUtils.success(movie);
     }
 
@@ -54,7 +58,7 @@ public class MovieServiceImpl implements MovieService {
         if(movies.size()<=0){
             return ResultUtils.error(ResultEnum.NOT_MOVIEBYTITLE);
         }
-        return ResultUtils.success();
+        return ResultUtils.success(movies);
     }
 
     /**
@@ -79,5 +83,27 @@ public class MovieServiceImpl implements MovieService {
             return ResultUtils.error(ResultEnum.UN_ERROR);
         }
 
+    }
+
+    /**
+     * 爬取图片链接
+     * 1.如果有结果，替换数据库数据
+     * 2.返回数据
+     * @param mTitle
+     * @param movieId
+     * @return
+     */
+    @Override
+    public Result getCover(String mTitle, Integer movieId) {
+        CoverPageProcessor coverPageProcessor=new CoverPageProcessor();
+        String cover= coverPageProcessor.main(mTitle);
+        if(cover!=null&&movieId!=null){
+            Movie movie=new Movie();
+            movie.setMovieId(movieId);
+            movie.setCover(cover);
+            movieMapper.updateByPrimaryKeySelective(movie);
+            return ResultUtils.success(cover);
+        }
+        return  ResultUtils.error(ResultEnum.NOT_COVER);
     }
 }

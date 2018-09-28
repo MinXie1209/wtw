@@ -14,7 +14,7 @@ public interface HistoricalRecordsService {
      * @param userId
      * @return
      */
-    @Cacheable(value = "movie",key = "#root.targetClass+#root.methodName+#userId",unless = "#result eq null ")
+
     Result listHistoricalRecordsByUserId(String userId);
 
     /**
